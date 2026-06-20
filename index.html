@@ -558,28 +558,34 @@
                 font-size: 14px;
             }
         }
-                /* ============================================ */
-        /* تحسينات للشاشات الصغيرة (التلفونات) */
         /* ============================================ */
-
-        /* تعديل حجم الخط للهواتف */
+        /* تحسينات الهواتف - نسخة محسنة 100% */
+        /* ============================================ */
         @media (max-width: 768px) {
+            /* الهيدر */
+            header {
+                padding: 10px 15px !important;
+            }
+            .logo img {
+                width: 40px !important;
+                height: 40px !important;
+            }
+            .logo-text {
+                font-size: 22px !important;
+            }
+            
+            /* الهيرو */
             .hero h1 {
-                font-size: 28px !important;
+                font-size: 26px !important;
             }
             .hero p {
-                font-size: 15px !important;
-                padding: 0 15px;
-            }
-            .section-title {
-                font-size: 28px !important;
-                margin-top: 60px !important;
+                font-size: 14px !important;
+                padding: 0 10px !important;
             }
             .btn {
-                padding: 12px 25px !important;
-                font-size: 14px !important;
+                padding: 10px 20px !important;
+                font-size: 13px !important;
                 width: 100% !important;
-                text-align: center !important;
             }
             .btn-group {
                 flex-direction: column !important;
@@ -587,153 +593,194 @@
                 width: 100% !important;
             }
             .btn-group a {
-                width: 80% !important;
+                width: 90% !important;
             }
-        }
-
-        /* تعديل حجم الستيرنج والأنيميشن للهواتف */
-        @media (max-width: 768px) {
+            
+            /* الأنيميشن */
+            .demo-section {
+                padding: 40px 10px !important;
+                margin: 20px auto 40px !important;
+            }
             .demo-device-wrapper {
-                width: 100% !important;
-                height: auto !important;
-                aspect-ratio: 580 / 270 !important;
+                width: 95vw !important;
+                height: 45vw !important;
+                max-width: 450px !important;
+                max-height: 210px !important;
             }
             .d-wheel {
-                width: 80px !important;
-                height: 80px !important;
-                margin-left: -40px !important;
-                margin-top: -40px !important;
+                width: 70px !important;
+                height: 70px !important;
+                margin-left: -35px !important;
+                margin-top: -35px !important;
                 border-width: 8px !important;
             }
             .d-wheel::before {
-                font-size: 8px !important;
+                font-size: 7px !important;
             }
             .d-wheel::after {
                 width: 3px !important;
-                height: 10px !important;
+                height: 8px !important;
             }
             .d-pedal {
-                width: 35px !important;
-                height: 80px !important;
-                bottom: 10px !important;
+                width: 30px !important;
+                height: 70px !important;
+                bottom: 8px !important;
             }
             .d-gas {
-                right: 10px !important;
+                right: 8px !important;
             }
             .d-brake {
-                left: 10px !important;
+                left: 8px !important;
             }
             .d-shifter {
-                width: 20px !important;
-                height: 60px !important;
-                font-size: 7px !important;
+                width: 16px !important;
+                height: 50px !important;
+                font-size: 6px !important;
             }
             .d-shifter-up {
-                margin-left: 50px !important;
+                margin-left: 45px !important;
             }
             .d-shifter-down {
-                margin-left: -70px !important;
+                margin-left: -55px !important;
             }
             .thumb {
-                width: 25px !important;
-                height: 40px !important;
+                width: 20px !important;
+                height: 35px !important;
             }
             .thumb-left {
-                left: 10px !important;
-                top: 80px !important;
+                left: 8px !important;
+                top: 70px !important;
             }
             .thumb-right {
-                right: 10px !important;
-                top: 80px !important;
+                right: 8px !important;
+                top: 70px !important;
             }
             .d-handbrake-btn {
-                width: 30px !important;
-                height: 22px !important;
-                font-size: 11px !important;
-                top: 8px !important;
-                left: 10px !important;
+                width: 25px !important;
+                height: 20px !important;
+                font-size: 10px !important;
+                top: 6px !important;
+                left: 8px !important;
             }
             .d-settings {
-                width: 25px !important;
-                height: 22px !important;
-                font-size: 11px !important;
-                top: 8px !important;
-                right: 10px !important;
+                width: 22px !important;
+                height: 20px !important;
+                font-size: 10px !important;
+                top: 6px !important;
+                right: 8px !important;
             }
             .d-horn-btn {
-                width: 22px !important;
-                height: 22px !important;
-                font-size: 9px !important;
+                width: 18px !important;
+                height: 18px !important;
+                font-size: 8px !important;
             }
-        }
-
-        /* تعديل الأزرار الإضافية للهواتف */
-        @media (max-width: 768px) {
+            
+            /* الأزرار الإضافية */
             .sec-btn {
-                width: 22px !important;
-                height: 22px !important;
-                font-size: 9px !important;
+                width: 20px !important;
+                height: 20px !important;
+                font-size: 8px !important;
             }
-            .sec-btn-1 { margin-top: -55px !important; margin-left: -55px !important; }
-            .sec-btn-2 { margin-top: -55px !important; margin-left: 35px !important; }
-            .sec-btn-3 { margin-top: 35px !important; margin-left: -55px !important; }
-            .sec-btn-4 { margin-top: 35px !important; margin-left: 35px !important; }
-            .sec-btn-5 { margin-top: 60px !important; margin-left: -10px !important; }
-        }
-
-        /* تعديل البطاقات للهواتف */
-        @media (max-width: 768px) {
+            .sec-btn-1 { margin-top: -45px !important; margin-left: -45px !important; }
+            .sec-btn-2 { margin-top: -45px !important; margin-left: 28px !important; }
+            .sec-btn-3 { margin-top: 30px !important; margin-left: -45px !important; }
+            .sec-btn-4 { margin-top: 30px !important; margin-left: 28px !important; }
+            .sec-btn-5 { margin-top: 50px !important; margin-left: -8px !important; }
+            
+            /* البطاقات */
             .downloads {
                 flex-direction: column !important;
                 align-items: center !important;
-                padding: 0 15px !important;
+                padding: 0 10px !important;
+                gap: 15px !important;
             }
             .card {
                 width: 100% !important;
-                max-width: 350px !important;
-                padding: 25px 20px !important;
+                max-width: 320px !important;
+                padding: 20px 15px !important;
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+            .card h3 {
+                font-size: 18px !important;
+                display: block !important;
+            }
+            .card .price-tag {
+                font-size: 20px !important;
+                display: block !important;
+            }
+            .card p {
+                font-size: 13px !important;
+                display: block !important;
             }
             .card .btn {
+                display: block !important;
                 width: 100% !important;
+                padding: 10px !important;
+                font-size: 14px !important;
+                text-align: center !important;
             }
-        }
-
-        /* تعديل الخطوات للهواتف */
-        @media (max-width: 768px) {
+            
+            /* الخطوات */
             .guide-container {
-                padding: 0 15px !important;
+                padding: 0 10px !important;
             }
             .step {
-                padding: 18px !important;
-            }
-            .step h4 {
-                font-size: 16px !important;
-            }
-            .step p {
-                font-size: 14px !important;
-            }
-        }
-
-        /* تعديل FAQ للهواتف */
-        @media (max-width: 768px) {
-            .faq-container {
-                padding: 0 15px !important;
-            }
-            .faq-question {
-                font-size: 14px !important;
                 padding: 15px !important;
             }
-            .faq-answer {
+            .step h4 {
+                font-size: 15px !important;
+            }
+            .step p {
                 font-size: 13px !important;
+            }
+            
+            /* FAQ */
+            .faq-container {
+                padding: 0 10px !important;
+                margin-bottom: 40px !important;
+            }
+            .faq-question {
+                font-size: 13px !important;
+                padding: 12px 15px !important;
+            }
+            .faq-answer {
+                font-size: 12px !important;
                 padding: 0 15px !important;
             }
             .faq-item.active .faq-answer {
                 padding: 0 15px 15px !important;
             }
-        }
-
-        /* تعديل صندوق الدعم للهواتف */
-        @media (max-width: 768px) {
+            
+            /* التحكم */
+            .control-container {
+                flex-direction: column !important;
+                padding: 0 10px !important;
+            }
+            .control-block {
+                padding: 15px !important;
+            }
+            .control-block h4 {
+                font-size: 16px !important;
+            }
+            .control-block ul li {
+                font-size: 12px !important;
+            }
+            
+            /* Pro Tip و Hotspot */
+            .pro-tip-box, .hotspot-box {
+                margin: 15px 10px !important;
+                padding: 15px !important;
+            }
+            .pro-tip-title, .hotspot-title {
+                font-size: 16px !important;
+            }
+            .pro-tip-content p, .hotspot-content p {
+                font-size: 12px !important;
+            }
+            
+            /* صندوق الدعم */
             .support-box {
                 padding: 12px 20px !important;
                 gap: 12px !important;
@@ -751,65 +798,35 @@
             .support-label {
                 font-size: 10px !important;
             }
-        }
-
-        /* تعديل الـ Hero Section */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 100px 15px 40px !important;
-            }
-            .app-preview {
-                width: 95% !important;
-                max-width: 100% !important;
-            }
-        }
-
-        /* تعديل الـ Demo Section */
-        @media (max-width: 768px) {
-            .demo-section {
-                padding: 60px 10px !important;
-                margin: 20px auto 60px !important;
-            }
-        }
-
-        /* تعديل الـ Control Container */
-        @media (max-width: 768px) {
-            .control-container {
-                flex-direction: column !important;
-                padding: 0 15px !important;
-            }
-            .control-block {
-                padding: 20px !important;
-            }
-            .control-block h4 {
-                font-size: 17px !important;
-            }
-            .control-block ul li {
-                font-size: 13px !important;
-            }
-        }
-
-        /* تعديل الـ Pro Tip و Hotspot */
-        @media (max-width: 768px) {
-            .pro-tip-box, .hotspot-box {
-                margin: 20px 15px !important;
-                padding: 18px !important;
-            }
-            .pro-tip-title, .hotspot-title {
-                font-size: 17px !important;
-            }
-            .pro-tip-content p, .hotspot-content p {
-                font-size: 13px !important;
-            }
-        }
-
-        /* تعديل الفوتر */
-        @media (max-width: 768px) {
+            
+            /* الفوتر */
             .footer-content {
-                padding: 30px 15px !important;
+                padding: 20px 10px !important;
             }
             .footer-content p {
-                font-size: 12px !important;
+                font-size: 11px !important;
+            }
+            
+            /* عنوان الأقسام */
+            .section-title {
+                font-size: 24px !important;
+                margin: 40px 0 20px !important;
+            }
+            
+            /* نافذة الصورة */
+            .image-overlay-content {
+                padding: 10px !important;
+            }
+            .image-overlay-close {
+                width: 28px !important;
+                height: 28px !important;
+                font-size: 14px !important;
+                top: -8px !important;
+                right: -8px !important;
+            }
+            .image-overlay-caption {
+                font-size: 11px !important;
+                margin-top: 10px !important;
             }
         }
     </style>
