@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#0a0a0c">
     
     <meta name="google-site-verification" content="8VN5W1SjvqZ5II-f3CEG8yovlGuqHn9vY-hbN72-PK8" />
     
@@ -27,6 +29,9 @@
             --font-en: 'Poppins', sans-serif;
             --font-ar: 'Cairo', sans-serif;
             --font-logo: 'Orbitron', sans-serif;
+            color-scheme: dark;
+            --demo-scale: 1;
+            --demo-rotate: 0deg;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -155,9 +160,11 @@
 
         .demo-device-wrapper {
             position: relative; width: 580px; height: 270px; 
-            margin: 20px 0; transition: transform 2.8s cubic-bezier(0.19, 1, 0.22, 1);
+            margin: calc(20px + (var(--demo-scale) - 1) * 135px) 0;
+            transition: transform 2.8s cubic-bezier(0.19, 1, 0.22, 1);
             transform-style: preserve-3d;
             will-change: transform;
+            transform: scale(var(--demo-scale)) rotate(var(--demo-rotate));
         }
 
         .phone-frame {
@@ -251,19 +258,6 @@
         .sec-btn-3 { top: 50%; left: 50%; margin-top: 55px; margin-left: -83px; }
         .sec-btn-4 { top: 50%; left: 50%; margin-top: 55px; margin-left: 53px; }
         .sec-btn-5 { top: 50%; left: 50%; margin-top: 85px; margin-left: -15px; }
-
-        @media(max-width: 768px) {
-            .sec-btn {
-                width: 26px;
-                height: 26px;
-                font-size: 10px;
-            }
-            .sec-btn-1 { margin-top: -50px; margin-left: -45px; }
-            .sec-btn-2 { margin-top: -75px; margin-left: -22px; }
-            .sec-btn-3 { margin-top: -75px; margin-left: 22px; }
-            .sec-btn-4 { margin-top: -50px; margin-left: 45px; }
-            .sec-btn-5 { margin-top: -15px; margin-left: -15px; }
-        }
 
         .d-shifter {
             position: absolute; top: 50%; transform: translateY(-50%); width: 28px; height: 100px; 
@@ -522,27 +516,15 @@
             .hero h1 { font-size: 34px; }
             .nav-links, .social-links { display: none; }
             header { padding: 15px 20px; }
-            .demo-section { padding: 90px 15px; max-width: 95%; }
-            .demo-device-wrapper { width: 92vw; height: 43vw; }
-            .d-wheel { width: 110px; height: 110px; margin-left: -55px; margin-top: -55px; border-width: 10px; }
-            .d-shifter { height: 75px; }
-            .d-shifter-up { margin-left: 68px; } .d-shifter-down { margin-left: -96px; }
-            .d-pedal { height: 105px; bottom: 10px; width: 45px; }
-            .d-gas { right: 15px; } .d-brake { left: 15px; }
-            .d-handbrake-btn { top: 10px; left: 15px; width: 35px; height: 26px; font-size: 12px; }
-            .d-settings { top: 10px; right: 15px; width: 30px; height: 26px; font-size: 12px; }
-            
-            .sec-btn {
-                width: 26px;
-                height: 26px;
-                font-size: 10px;
-            }
-            .sec-btn-1 { margin-left: -70px; }
-            .sec-btn-2 { margin-left: -40px; }
-            .sec-btn-3 { margin-left: -10px; }
-            .sec-btn-4 { margin-left: 20px; }
-            .sec-btn-5 { margin-left: 50px; }
-            
+            .demo-section { padding: 90px 15px; max-width: 95%; overflow: hidden; }
+            :root { --demo-scale: 0.62; }
+        }
+
+        @media(max-width: 420px) {
+            :root { --demo-scale: 0.52; }
+        }
+
+        @media(max-width: 768px) {
             .support-box {
                 padding: 15px 25px;
                 gap: 15px;
@@ -556,277 +538,6 @@
             }
             .support-email {
                 font-size: 14px;
-            }
-        }
-        /* ============================================ */
-        /* تحسينات الهواتف - نسخة محسنة 100% */
-        /* ============================================ */
-        @media (max-width: 768px) {
-            /* الهيدر */
-            header {
-                padding: 10px 15px !important;
-            }
-            .logo img {
-                width: 40px !important;
-                height: 40px !important;
-            }
-            .logo-text {
-                font-size: 22px !important;
-            }
-            
-            /* الهيرو */
-            .hero h1 {
-                font-size: 26px !important;
-            }
-            .hero p {
-                font-size: 14px !important;
-                padding: 0 10px !important;
-            }
-            .btn {
-                padding: 10px 20px !important;
-                font-size: 13px !important;
-                width: 100% !important;
-            }
-            .btn-group {
-                flex-direction: column !important;
-                align-items: center !important;
-                width: 100% !important;
-            }
-            .btn-group a {
-                width: 90% !important;
-            }
-            
-            /* الأنيميشن */
-            .demo-section {
-                padding: 40px 10px !important;
-                margin: 20px auto 40px !important;
-            }
-            .demo-device-wrapper {
-                width: 95vw !important;
-                height: 45vw !important;
-                max-width: 450px !important;
-                max-height: 210px !important;
-            }
-            .d-wheel {
-                width: 70px !important;
-                height: 70px !important;
-                margin-left: -35px !important;
-                margin-top: -35px !important;
-                border-width: 8px !important;
-            }
-            .d-wheel::before {
-                font-size: 7px !important;
-            }
-            .d-wheel::after {
-                width: 3px !important;
-                height: 8px !important;
-            }
-            .d-pedal {
-                width: 30px !important;
-                height: 70px !important;
-                bottom: 8px !important;
-            }
-            .d-gas {
-                right: 8px !important;
-            }
-            .d-brake {
-                left: 8px !important;
-            }
-            .d-shifter {
-                width: 16px !important;
-                height: 50px !important;
-                font-size: 6px !important;
-            }
-            .d-shifter-up {
-                margin-left: 45px !important;
-            }
-            .d-shifter-down {
-                margin-left: -55px !important;
-            }
-            .thumb {
-                width: 20px !important;
-                height: 35px !important;
-            }
-            .thumb-left {
-                left: 8px !important;
-                top: 70px !important;
-            }
-            .thumb-right {
-                right: 8px !important;
-                top: 70px !important;
-            }
-            .d-handbrake-btn {
-                width: 25px !important;
-                height: 20px !important;
-                font-size: 10px !important;
-                top: 6px !important;
-                left: 8px !important;
-            }
-            .d-settings {
-                width: 22px !important;
-                height: 20px !important;
-                font-size: 10px !important;
-                top: 6px !important;
-                right: 8px !important;
-            }
-            .d-horn-btn {
-                width: 18px !important;
-                height: 18px !important;
-                font-size: 8px !important;
-            }
-            
-            /* الأزرار الإضافية */
-            .sec-btn {
-                width: 20px !important;
-                height: 20px !important;
-                font-size: 8px !important;
-            }
-            .sec-btn-1 { margin-top: -45px !important; margin-left: -45px !important; }
-            .sec-btn-2 { margin-top: -45px !important; margin-left: 28px !important; }
-            .sec-btn-3 { margin-top: 30px !important; margin-left: -45px !important; }
-            .sec-btn-4 { margin-top: 30px !important; margin-left: 28px !important; }
-            .sec-btn-5 { margin-top: 50px !important; margin-left: -8px !important; }
-            
-            /* البطاقات */
-            .downloads {
-                flex-direction: column !important;
-                align-items: center !important;
-                padding: 0 10px !important;
-                gap: 15px !important;
-            }
-            .card {
-                width: 100% !important;
-                max-width: 320px !important;
-                padding: 20px 15px !important;
-                display: block !important;
-                visibility: visible !important;
-                opacity: 1 !important;
-            }
-            .card h3 {
-                font-size: 18px !important;
-                display: block !important;
-            }
-            .card .price-tag {
-                font-size: 20px !important;
-                display: block !important;
-            }
-            .card p {
-                font-size: 13px !important;
-                display: block !important;
-            }
-            .card .btn {
-                display: block !important;
-                width: 100% !important;
-                padding: 10px !important;
-                font-size: 14px !important;
-                text-align: center !important;
-            }
-            
-            /* الخطوات */
-            .guide-container {
-                padding: 0 10px !important;
-            }
-            .step {
-                padding: 15px !important;
-            }
-            .step h4 {
-                font-size: 15px !important;
-            }
-            .step p {
-                font-size: 13px !important;
-            }
-            
-            /* FAQ */
-            .faq-container {
-                padding: 0 10px !important;
-                margin-bottom: 40px !important;
-            }
-            .faq-question {
-                font-size: 13px !important;
-                padding: 12px 15px !important;
-            }
-            .faq-answer {
-                font-size: 12px !important;
-                padding: 0 15px !important;
-            }
-            .faq-item.active .faq-answer {
-                padding: 0 15px 15px !important;
-            }
-            
-            /* التحكم */
-            .control-container {
-                flex-direction: column !important;
-                padding: 0 10px !important;
-            }
-            .control-block {
-                padding: 15px !important;
-            }
-            .control-block h4 {
-                font-size: 16px !important;
-            }
-            .control-block ul li {
-                font-size: 12px !important;
-            }
-            
-            /* Pro Tip و Hotspot */
-            .pro-tip-box, .hotspot-box {
-                margin: 15px 10px !important;
-                padding: 15px !important;
-            }
-            .pro-tip-title, .hotspot-title {
-                font-size: 16px !important;
-            }
-            .pro-tip-content p, .hotspot-content p {
-                font-size: 12px !important;
-            }
-            
-            /* صندوق الدعم */
-            .support-box {
-                padding: 12px 20px !important;
-                gap: 12px !important;
-                flex-wrap: wrap !important;
-                justify-content: center !important;
-            }
-            .support-icon {
-                width: 35px !important;
-                height: 35px !important;
-                font-size: 16px !important;
-            }
-            .support-email {
-                font-size: 13px !important;
-            }
-            .support-label {
-                font-size: 10px !important;
-            }
-            
-            /* الفوتر */
-            .footer-content {
-                padding: 20px 10px !important;
-            }
-            .footer-content p {
-                font-size: 11px !important;
-            }
-            
-            /* عنوان الأقسام */
-            .section-title {
-                font-size: 24px !important;
-                margin: 40px 0 20px !important;
-            }
-            
-            /* نافذة الصورة */
-            .image-overlay-content {
-                padding: 10px !important;
-            }
-            .image-overlay-close {
-                width: 28px !important;
-                height: 28px !important;
-                font-size: 14px !important;
-                top: -8px !important;
-                right: -8px !important;
-            }
-            .image-overlay-caption {
-                font-size: 11px !important;
-                margin-top: 10px !important;
             }
         }
     </style>
@@ -1184,7 +895,7 @@
         function resetDemoUI() {
             phone.style.transition = 'transform 2.8s cubic-bezier(0.19, 1, 0.22, 1)';
             wheel.style.transition = 'transform 2.8s cubic-bezier(0.19, 1, 0.22, 1)';
-            phone.style.transform = 'rotate(0deg)';
+            phone.style.setProperty('--demo-rotate', '0deg');
             wheel.style.transform = 'rotate(0deg)';
             thumbL.style.top = '110px';
             thumbL.style.left = '15px';
@@ -1217,7 +928,7 @@
                 // ==========================================
                 // 1. توجيه يسار
                 // ==========================================
-                phone.style.transform = 'rotate(-80deg)';
+                phone.style.setProperty('--demo-rotate', '-80deg');
                 wheel.style.transform = 'rotate(-260deg)';
                 await wait(2000);
                 if (currentId !== animationId) break;
@@ -1225,7 +936,7 @@
                 // ==========================================
                 // 2. توجيه يمين
                 // ==========================================
-                phone.style.transform = 'rotate(80deg)';
+                phone.style.setProperty('--demo-rotate', '80deg');
                 wheel.style.transform = 'rotate(260deg)';
                 await wait(2000);
                 if (currentId !== animationId) break;
@@ -1233,7 +944,7 @@
                 // ==========================================
                 // 3. العودة للمنتصف
                 // ==========================================
-                phone.style.transform = 'rotate(0deg)';
+                phone.style.setProperty('--demo-rotate', '0deg');
                 wheel.style.transform = 'rotate(0deg)';
                 await wait(1200);
                 if (currentId !== animationId) break;
