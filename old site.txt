@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="google-site-verification" content="8VN5W1SjvqZ5II-f3CEG8yovlGuqHn9vY-hbN72-PK8" />
+    
+    <meta name="description" content="VELOX by Rizdex Studio - Turn your Android phone into a pro steering wheel for PC racing games like Assetto Corsa with zero delay.">
+    <meta name="keywords" content="VELOX, steering wheel app, android steering wheel, assetto corsa phone steering, Rizdex Studio, vJoy steering">
+    
+    <title>VELOX - Rizdex Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Poppins:wght@400;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #09090e;
+            --surface-color: #151520;
+            --primary: #a020f0;
+            --primary-glow: 0 0 15px rgba(160, 32, 240, 0.6), 0 0 30px rgba(160, 32, 240, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #a0a0b0;
+            --font-en: 'Poppins', sans-serif;
+            --font-ar: 'Cairo', sans-serif;
+            --font-logo: 'Orbitron', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-color); color: var(--text-main);
+            overflow-x: hidden; font-family: var(--font-en); transition: all 0.3s ease;
+        }
+
+        html[dir="rtl"] body { font-family: var(--font-ar); }
+
+        .bg-glow {
+            position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(160,32,240,0.05) 0%, rgba(0,0,0,0) 50%);
+            z-index: -1; animation: pulseBg 10s infinite alternate;
+        }
+
+        @keyframes pulseBg { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; background: rgba(12, 12, 18, 0.85);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(160, 32, 240, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(160, 32, 240, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .logo { text-decoration: none; display: flex; align-items: center; gap: 18px; }
+        .logo img {
+            width: 60px; height: 60px; border-radius: 12px;
+            border: 2px solid rgba(160, 32, 240, 0.5);
+            object-fit: cover; box-shadow: var(--primary-glow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .logo:hover img { transform: scale(1.15) rotate(5deg); box-shadow: 0 0 25px rgba(160, 32, 240, 0.9); border-color: #b347f5; }
+        .logo-text { 
+            direction: ltr; display: inline-block; font-family: var(--font-logo); 
+            font-size: 34px; font-weight: 900; color: #fff; letter-spacing: 3px; margin-top: 3px;
+        }
+        .logo-text span { color: var(--primary); text-shadow: var(--primary-glow); }
+
+        .nav-links { display: flex; gap: 35px; align-items: center; }
+        .nav-links a { 
+            color: var(--text-main); text-decoration: none; font-weight: 700; 
+            font-size: 15px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
+            position: relative;
+        }
+        .nav-links a:hover { color: var(--primary); text-shadow: var(--primary-glow); }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -5px; left: 0; background-color: var(--primary);
+            transition: width 0.3s ease; box-shadow: var(--primary-glow);
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .lang-btn {
+            background: transparent; border: 1px solid var(--primary); color: white;
+            padding: 6px 18px; border-radius: 20px; cursor: pointer; font-weight: bold;
+            transition: 0.3s; font-family: var(--font-ar);
+        }
+        .lang-btn:hover { background: var(--primary); box-shadow: var(--primary-glow); transform: translateY(-2px);}
+
+        .hero {
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            padding: 100px 20px 50px;
+        }
+
+        .hero h1 { font-size: 55px; font-weight: 900; margin-bottom: 20px; line-height: 1.2; }
+        .hero h1 span { color: var(--primary); text-shadow: var(--primary-glow); }
+        .hero p { font-size: 18px; color: var(--text-muted); margin-bottom: 30px; max-width: 700px; line-height: 1.8;}
+
+        .btn-group { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px;}
+        .btn { padding: 15px 40px; font-size: 18px; font-weight: 700; border-radius: 8px; text-decoration: none; cursor: pointer; transition: all 0.3s; border: none; }
+        .btn-primary { background-color: var(--primary); color: white; box-shadow: var(--primary-glow); }
+        .btn-primary:hover { background-color: #b347f5; transform: translateY(-3px); box-shadow: 0 5px 25px rgba(160, 32, 240, 0.8); }
+        .btn-secondary { background-color: transparent; color: var(--text-main); border: 2px solid var(--primary); }
+        .btn-secondary:hover { background-color: rgba(160, 32, 240, 0.1); transform: translateY(-3px); }
+
+        .app-preview {
+            max-width: 80%; width: 800px; border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(160, 32, 240, 0.3);
+            border: 2px solid rgba(160, 32, 240, 0.2);
+            animation: float 5s ease-in-out infinite; margin-top: 20px;
+        }
+
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+
+        .section-title { text-align: center; font-size: 40px; margin: 80px 0 40px; color: var(--text-main); }
+
+        /* 🌟 المحاكي التفاعلي 🌟 */
+        .demo-section {
+            display: flex; flex-direction: column; align-items: center;
+            margin: 40px auto; width: 100%; max-width: 800px; perspective: 1000px;
+        }
+        
+        .demo-caption {
+            font-size: 22px; font-weight: bold; color: var(--primary);
+            text-shadow: var(--primary-glow); 
+            margin-bottom: 70px; /* 🌟 تم الرفع للأعلى 🌟 */
+            height: 30px; transition: 0.3s; text-align: center;
+        }
+
+        .demo-device-wrapper {
+            position: relative; width: 500px; height: 250px; 
+            margin: 180px 0; /* 🌟 مساحة أمان ضخمة عشان الدوران ما يلمس الكلام 🌟 */
+            transition: transform 2.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            transform-style: preserve-3d;
+        }
+
+        .phone-frame {
+            width: 100%; height: 100%; background: #0c0c12;
+            border-radius: 30px; border: 8px solid #2a2a35;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.5);
+            position: relative; overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        .app-ui { width: 100%; height: 100%; position: relative; }
+        
+        .d-wheel {
+            position: absolute; left: 50%; top: 50%; 
+            width: 150px; height: 150px; margin-left: -75px; margin-top: -75px;
+            border: 10px solid #333; border-radius: 50%;
+            transition: transform 2.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .d-wheel::before {
+            content: 'VELOX'; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); color: var(--primary); font-weight: 900;
+            font-family: var(--font-logo); font-size: 12px;
+        }
+        .d-wheel::after {
+            content: ''; position: absolute; top: 0; left: 50%; width: 4px; height: 16px;
+            background: var(--primary); transform: translateX(-50%);
+        }
+
+        .d-pedal {
+            position: absolute; bottom: 20px; width: 50px; height: 120px;
+            background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 10px; overflow: hidden; display: flex; align-items: flex-start;
+        }
+        .d-gas { right: 25px; }
+        .d-brake { left: 25px; }
+        
+        .d-pedal-fill { width: 100%; height: 0%; transition: height 0.3s ease, background 0.3s; }
+        .d-gas .d-pedal-fill { background: linear-gradient(to bottom, #00ff88, #00b35f); }
+        .d-brake .d-pedal-fill { background: linear-gradient(to bottom, #ff3333, #cc0000); }
+
+        .d-shifter {
+            position: absolute; top: 50%; width: 45px; height: 70px; margin-top: -35px; 
+            background: rgba(255,255,255,0.08); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: center; align-items: center;
+            font-weight: bold; color: rgba(255,255,255,0.7); font-size: 11px; transition: all 0.1s;
+        }
+        .d-shifter-up { right: 90px; } 
+        .d-shifter-down { left: 90px; } 
+        .d-shifter.active { background: var(--primary); color: white; transform: scale(0.9); }
+
+        .hand-base {
+            position: absolute; top: 50%; width: 40px; height: 180px;
+            background: #1a1a24; border-radius: 20px; transform: translateY(-50%);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 5;
+        }
+        .hand-left { left: -20px; }
+        .hand-right { right: -20px; }
+
+        .thumb {
+            position: absolute; width: 40px; height: 70px; 
+            background: #2a2a35; border-radius: 25px; border: 2px solid #3a3a45; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.6); z-index: 10; 
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .thumb::after {
+            content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+            width: 18px; height: 20px; border-radius: 10px; background: rgba(255,255,255,0.1);
+        }
+
+        .thumb-left { left: 10px; top: 100px; transform: rotate(15deg); }
+        .thumb-right { right: 10px; top: 100px; transform: rotate(-15deg); }
+
+        /* الشروحات */
+        .control-container { max-width: 800px; margin: 0 auto; padding: 0 20px; display: flex; gap: 20px; flex-wrap: wrap; }
+        .control-block { background: var(--surface-color); padding: 25px; border-radius: 10px; flex: 1 1 350px; border: 1px solid rgba(160, 32, 240, 0.1); transition: 0.3s; }
+        .control-block:hover { border-color: rgba(160, 32, 240, 0.4); box-shadow: 0 5px 20px rgba(160, 32, 240, 0.2); }
+        .control-block h4 { color: var(--primary); text-shadow: var(--primary-glow); font-size: 20px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;}
+        .control-block ul { list-style: none; color: var(--text-muted); line-height: 1.8; font-size: 15px; }
+        .control-block ul li { margin-bottom: 10px; position: relative; padding-left: 20px; }
+        html[dir="ltr"] .control-block ul li::before { content: '▹'; position: absolute; left: 0; color: var(--primary); }
+        html[dir="rtl"] .control-block ul li { padding-left: 0; padding-right: 20px; }
+        html[dir="rtl"] .control-block ul li::before { content: '◃'; position: absolute; right: 0; color: var(--primary); }
+
+        .pro-tip-box {
+            max-width: 800px; margin: 30px auto 0; padding: 25px;
+            background: rgba(255, 170, 0, 0.05); border: 1px solid rgba(255, 170, 0, 0.4);
+            border-radius: 12px; box-shadow: 0 5px 25px rgba(255, 170, 0, 0.08);
+            position: relative; margin-left: 20px; margin-right: 20px;
+        }
+        .pro-tip-title {
+            color: #ffcc00; font-size: 22px; font-weight: 900;
+            display: flex; align-items: center; gap: 10px; margin-bottom: 15px;
+        }
+        .pro-tip-content p { color: var(--text-muted); line-height: 1.8; margin-bottom: 10px; font-size: 16px; }
+        .pro-tip-content strong { color: var(--text-main); }
+        .pro-tip-highlight {
+            background: rgba(255, 170, 0, 0.12); padding: 15px; border-radius: 8px;
+            border-left: 4px solid #ffcc00; margin-top: 15px; font-size: 15px; color: #ffe680; line-height: 1.8;
+        }
+        html[dir="rtl"] .pro-tip-highlight { border-left: none; border-right: 4px solid #ffcc00; }
+        @media(min-width: 840px) { .pro-tip-box { margin-left: auto; margin-right: auto; } }
+
+        .downloads { display: flex; justify-content: center; gap: 30px; padding: 0 50px; flex-wrap: wrap; }
+        .card {
+            background-color: var(--surface-color); padding: 40px 30px; border-radius: 15px;
+            text-align: center; width: 300px; border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.4s; position: relative; overflow: hidden;
+        }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--primary); box-shadow: var(--primary-glow); transform: scaleX(0); transition: 0.4s;
+        }
+        .card:hover::before { transform: scaleX(1); }
+        .card:hover { transform: translateY(-10px); border-color: rgba(160, 32, 240, 0.3); }
+        .card h3 { font-size: 22px; margin-bottom: 15px; }
+        .card p { color: var(--text-muted); margin-bottom: 25px; font-size: 14px; line-height: 1.6;}
+        .card .btn { width: 100%; display: block; padding: 10px; font-size: 16px; }
+
+        .guide-container { max-width: 800px; margin: 0 auto; padding: 0 20px;}
+        .step { background: var(--surface-color); padding: 25px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; overflow: hidden; }
+        html[dir="ltr"] .step { border-left: 4px solid var(--primary); }
+        html[dir="rtl"] .step { border-right: 4px solid var(--primary); }
+        .step h4 { color: var(--primary); font-size: 20px; margin-bottom: 10px; }
+        .step p { color: var(--text-muted); line-height: 1.8; }
+
+        .faq-container { max-width: 800px; margin: 0 auto 100px; padding: 0 20px; }
+        .faq-item { background: var(--surface-color); margin-bottom: 10px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); transition: 0.3s; }
+        .faq-item:hover { border-color: rgba(160, 32, 240, 0.2); }
+        .faq-question { padding: 20px; cursor: pointer; font-weight: 700; display: flex; justify-content: space-between; transition: 0.3s; color: var(--text-main); }
+        .faq-question:hover { color: var(--primary); }
+        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease; color: var(--text-muted); line-height: 1.8; font-size: 15px; }
+        .faq-item.active .faq-answer { padding: 0 20px 20px; max-height: 200px; }
+        html[dir="ltr"] .faq-question span { margin-left: auto; }
+        html[dir="rtl"] .faq-question span { margin-right: auto; margin-left: 0; }
+
+        .footer-content { padding: 50px 20px; background: rgba(21, 21, 32, 0.8); border-top: 1px solid rgba(160, 32, 240, 0.2); text-align: center; }
+        .support-box {
+            display: inline-flex; align-items: center; gap: 15px;
+            background: rgba(160, 32, 240, 0.05); padding: 15px 30px;
+            border-radius: 50px; border: 1px dashed rgba(160, 32, 240, 0.3);
+            margin-bottom: 20px; transition: 0.3s; text-decoration: none;
+        }
+        .support-box:hover { background: rgba(160, 32, 240, 0.1); border-style: solid; transform: translateY(-3px); box-shadow: var(--primary-glow); }
+        .support-icon {
+            font-size: 24px; background: var(--primary); width: 45px; height: 45px; 
+            display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: var(--primary-glow);
+        }
+        .support-text { text-align: left; }
+        html[dir="rtl"] .support-text { text-align: right; }
+        .support-text span { display: block; font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .support-text b { display: block; font-size: 16px; color: var(--text-main); }
+
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 35px; }
+            .nav-links a { display: none; }
+            header { padding: 15px 20px; }
+            .demo-device-wrapper { width: 90vw; height: 45vw; margin: 120px 0; }
+            .d-wheel { width: 100px; height: 100px; margin-left: -50px; margin-top: -50px; }
+            .d-shifter { width: 35px; height: 50px; margin-top: -25px; }
+            .d-shifter-up { right: 60px; }
+            .d-shifter-down { left: 60px; }
+            .downloads { flex-direction: column; align-items: center; }
+            .control-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <header>
+        <a href="#" class="logo" dir="ltr">
+            <img src="logo.png" onerror="this.onerror=null; this.src='logo.ico';" alt="VELOX Logo">
+            <div class="logo-text">VELO<span>X</span></div>
+        </a>
+        <div class="nav-links">
+            <a href="#home" data-key="nav_home">Home</a>
+            <a href="#tutorial" data-key="nav_tutorial">Tutorial</a>
+            <a href="#downloads" data-key="nav_download">Downloads</a>
+            <a href="#guide" data-key="nav_guide">Setup</a>
+            <button class="lang-btn" id="langToggle">عربي</button>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <h1 data-key="hero_title">Turn your phone into a <span>Pro Steering Wheel</span></h1>
+        <p data-key="hero_desc">Zero delay, 1:1 instant response powered by Sensor Fusion. Enjoy all racing games as if you own a real physical steering wheel.</p>
+        <div class="btn-group">
+            <a href="#downloads" class="btn btn-secondary" data-key="hero_btn_trial">Start 3-Day Free Trial</a>
+            <a href="#" class="btn btn-primary" data-key="hero_btn_buy">Buy Full Version $5.99</a>
+        </div>
+        <img src="app.png" alt="VELOX Interface" class="app-preview">
+    </section>
+
+    <h2 class="section-title" id="tutorial" data-key="demo_title">Interactive Tutorial</h2>
+    <section class="demo-section">
+        <div class="demo-caption" id="demoCaption">جاري التحميل...</div>
+        
+        <div class="demo-device-wrapper" id="phoneWrapper">
+            <div class="hand-base hand-left"></div>
+            <div class="hand-base hand-right"></div>
+            
+            <div class="phone-frame">
+                <div class="app-ui">
+                    <div class="d-shifter d-shifter-down" id="shiftDown">DOWN</div>
+                    <div class="d-shifter d-shifter-up" id="shiftUp">UP</div>
+                    
+                    <div class="d-pedal d-brake">
+                        <div class="d-pedal-fill" id="brakeFill"></div>
+                    </div>
+                    
+                    <div class="d-wheel" id="steerWheel"></div>
+                    
+                    <div class="d-pedal d-gas">
+                        <div class="d-pedal-fill" id="gasFill"></div>
+                    </div>
+
+                    <div class="thumb thumb-left" id="thumbLeft"></div>
+                    <div class="thumb thumb-right" id="thumbRight"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="control-container">
+        <div class="control-block" id="control_en">
+            <h4>In-App Touch Control 🎮</h4>
+            <ul>
+                <li><strong>Pro Steering:</strong> Rotate the phone to steer. The in-game wheel follows your exact hand movement instantly.</li>
+                <li><strong>Analog Pedals:</strong> Slide your finger down on the Gas or Brake pedal area. Speed increases gradually based on your finger position for precise control.</li>
+                <li><strong>Quick Shifters:</strong> Tap the left shifter to downshift, tap the right shifter to upshift instantly.</li>
+            </ul>
+        </div>
+        <div class="control-block" id="control_ar" style="display: none;">
+            <h4>طريقة التحكم داخل التطبيق 🎮</h4>
+            <ul>
+                <li><strong>مقود احترافي:</strong> قم بإمالة الهاتف يميناً ويساراً لتوجيه السيارة. المقود داخل اللعبة يتبع حركة يدك بدقة فوراً وبدون أي تأخير.</li>
+                <li><strong>دواسات تناسبية (Analog):</strong> اسحب بإصبعك للأسفل على منطقة البنزين أو الفرامل. تزداد السرعة تدريجياً بناءً على موضع إصبعك لتحكم دقيق جداً.</li>
+                <li><strong>ناقل حركة سريع (Shifters):</strong> اضغط على الناقل الأيسر لخفض السرعة، واضغط على الأيمن لرفع السرعة فوراً.</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="pro-tip-box">
+        <div class="pro-tip-title">⚠️ <span data-key="tip_title">Important: Steering Angles & Physics</span></div>
+        <div class="pro-tip-content">
+            <p data-key="tip_p1">For the most realistic and <strong>stable</strong> experience at high and low speeds, hold your phone at an angle between <strong>90° - 120°</strong> (almost vertical).</p>
+            <p data-key="tip_p2">If you want extremely <strong>fast and sensitive</strong> steering, tilt the phone further back (more than 120°, but try not to exceed 160° to keep the steering under control).</p>
+            <p data-key="tip_p3" style="color: #ffcc00; margin-top: 15px; font-size: 18px;"><strong>⚠️ Game Settings:</strong> Set the steering angle in your game to <strong>800°</strong> for the best experience.</p>
+            
+            <div class="pro-tip-highlight">
+                <strong data-key="tip_reason_title">Why does this happen?</strong> 
+                <span data-key="tip_reason_desc">VELOX relies on your phone's gravity sensors. When you tilt the phone backward, gravity shifts away from the steering axis. This makes the sensor highly sensitive to the slightest hand movements, instantly multiplying the steering speed!</span>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="section-title" id="downloads" data-key="down_title">Download Center</h2>
+    <section class="downloads">
+        <div class="card">
+            <h3 data-key="card1_title">📱 Android App</h3>
+            <p data-key="card1_desc">The main app for your phone. Completely free and without any annoying ads.</p>
+            <a href="#" class="btn btn-secondary" data-key="card_btn_download">Download App</a>
+        </div>
+        <div class="card">
+            <h3 data-key="card2_title">💻 PC Software</h3>
+            <p data-key="card2_desc">The software that receives your phone's signals and translates them to any racing game instantly.</p>
+            <a href="#" class="btn btn-primary" data-key="card_btn_download">Download PC Software</a>
+        </div>
+        <div class="card">
+            <h3 data-key="card3_title">⚙️ vJoy Driver</h3>
+            <p data-key="card3_desc">A virtual driver required for your PC to recognize your phone as a genuine controller.</p>
+            <a href="#" class="btn btn-secondary" data-key="card_btn_download">Download vJoy</a>
+        </div>
+    </section>
+
+    <h2 class="section-title" id="guide" data-key="guide_title">Setup Guide</h2>
+    <section class="guide-container">
+        <div class="step">
+            <h4 data-key="step1_title">Step 1: Install vJoy Driver ⚙️</h4>
+            <p data-key="step1_desc">Download and install vJoy. Open "Configure vJoy", ensure X, Y, and Z axes are checked, set Buttons to 5, and click Apply.</p>
+        </div>
+        <div class="step">
+            <h4 data-key="step2_title">Step 2: Start PC Software 💻</h4>
+            <p data-key="step2_desc">Run the PC Software. If Windows shows a protection warning, simply click "More Info" then "Run anyway". Make sure PC and Phone are connected to the same Wi-Fi network.</p>
+        </div>
+        <div class="step">
+            <h4 data-key="step3_title">Step 3: Connect & Drive 📱</h4>
+            <p data-key="step3_desc">Open the app on your phone, and it will automatically find your PC. Once you see the green "CONNECTED" text, you are ready to race!</p>
+        </div>
+    </section>
+
+    <h2 class="section-title" id="faq" data-key="faq_title">FAQ</h2>
+    <section class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question"><span data-key="faq_q1">Is there any delay?</span> <span>+</span></div>
+            <div class="faq-answer" data-key="faq_a1">Impossible! We use UDP protocol with a unique Sensor Fusion system to ensure your movement transfers to the game in parts of a millisecond.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><span data-key="faq_q2">The car loses control at high speeds, what is the solution?</span> <span>+</span></div>
+            <div class="faq-answer" data-key="faq_a2">Since our response is "raw" and very fast, we recommend activating the "Stability Control" system (100% in games) for perfect stability.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><span data-key="faq_q3">What happens after the 3-day free trial?</span> <span>+</span></div>
+            <div class="faq-answer" data-key="faq_a3">The PC software will stop receiving orders and ask you to enter an "Activation Code". You can buy the code from our website with a one-time payment to activate it forever.</div>
+        </div>
+    </section>
+
+    <footer class="footer-content">
+        <a href="mailto:support.rizdex@gmail.com" class="support-box">
+            <div class="support-icon">✉️</div>
+            <div class="support-text">
+                <span data-key="footer_support_label">Technical Support</span>
+                <b>support.rizdex@gmail.com</b>
+            </div>
+        </a>
+        <p data-key="footer_text" style="color: var(--text-muted); font-size: 14px;">
+            All rights reserved &copy; 2026 Developed by <span style="color: var(--primary); font-weight: bold;">Rizdex Studio</span>
+        </p>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                nav_home: "Home", nav_tutorial: "Tutorial", nav_download: "Downloads", nav_guide: "Setup",
+                hero_title: "Turn your phone into a <span>Pro Steering Wheel</span>",
+                hero_desc: "Zero delay, 1:1 instant response powered by Sensor Fusion. Enjoy all racing games as if you own a real physical steering wheel.",
+                hero_btn_trial: "Start 3-Day Free Trial", hero_btn_buy: "Buy Full Version $5.99",
+                demo_title: "Interactive Tutorial",
+                anim_steer: "🔄 Pro Steering: Tilt Phone Left & Right",
+                anim_gas: "Analog Gas: Slide thumb down to accelerate",
+                anim_brake: "🛑 Analog Brake: Slide thumb down to brake",
+                anim_shift: "⚙️ Quick Shifters: Tap to shift gears",
+                control_title: "App Touch Control",
+                tip_title: "Important: Steering Angles & Physics",
+                tip_p1: "For the most realistic and <strong>stable</strong> experience at high and low speeds, hold your phone at an angle between <strong>90° - 120°</strong> (almost vertical).",
+                tip_p2: "If you want extremely <strong>fast and sensitive</strong> steering, tilt the phone further back (more than 120°, but try not to exceed 160° to keep the steering under control).",
+                tip_p3: "<strong style='color: #ffcc00;'>⚠️ Game Settings:</strong> To achieve accuracy and realism in control, set the steering angle in the game to <strong>800°</strong> in the game settings.",
+                tip_reason_title: "Why does this happen?",
+                tip_reason_desc: "VELOX relies on your phone's gravity sensors (Accelerometer). When you tilt the phone backward, gravity shifts away from the steering axis. This mathematical shift makes the sensor highly sensitive to the slightest hand movements, instantly multiplying the steering speed!",
+                down_title: "Download Center",
+                card1_title: "📱 Android App", card1_desc: "The main app for your phone. Completely free and without any annoying ads.",
+                card2_title: "💻 PC Software", card2_desc: "The software that receives your phone's signals and translates them to any racing game instantly.",
+                card3_title: "⚙️ vJoy Driver", card3_desc: "A virtual driver required for your PC to recognize your phone as a genuine controller.",
+                card_btn_download: "Download",
+                guide_title: "Setup Guide",
+                step1_title: "Step 1: Install vJoy Driver ⚙️", step1_desc: "Download and install vJoy. Open 'Configure vJoy', ensure X, Y, and Z axes are checked, set Buttons to 5, and click Apply.",
+                step2_title: "Step 2: Start PC Software 💻", step2_desc: "Run the PC Software. If Windows shows a protection warning, simply click 'More Info' then 'Run anyway'. Make sure PC and Phone are connected to the same Wi-Fi network.",
+                step3_title: "Step 3: Connect & Drive 📱", step3_desc: "Open the app on your phone, and it will automatically find your PC. Once you see the green 'CONNECTED' text, you are ready to race!",
+                faq_title: "FAQ", faq_q1: "Is there any delay?", faq_a1: "Impossible! We use UDP protocol with a unique Sensor Fusion system to ensure your movement transfers to the game in parts of a millisecond.", faq_q2: "The car loses control at high speeds, what is the solution?", faq_a2: "Since our response is 'raw' and very fast, we recommend activating the 'Stability Control' system (100% in games) for perfect stability.", faq_q3: "What happens after the 3-day free trial?", faq_a3: "The PC software will stop receiving orders and ask you to enter an 'Activation Code'. You can buy the code from our website with a one-time payment to activate it forever.",
+                footer_support_label: "Technical Support",
+                footer_text: "All rights reserved &copy; 2026 Developed by <span style='color: var(--primary); font-weight: bold;'>Rizdex Studio</span>"
+            },
+            ar: {
+                nav_home: "الرئيسية", nav_tutorial: "المحاكي", nav_download: "التحميل", nav_guide: "دليل التشغيل",
+                hero_title: "حوّل هاتفك إلى <span>عجلة قيادة احترافية</span>",
+                hero_desc: "بدون تأخير، استجابة فورية 1:1 بفضل Sensor Fusion. استمتع بجميع ألعاب السيارات وكأنك تمتلك مقوداً حقيقياً.",
+                hero_btn_trial: "ابدأ التجربة المجانية (3 أيام)", hero_btn_buy: "شراء النسخة الكاملة $5.99",
+                demo_title: "المحاكاة التفاعلية (طريقة اللعب)",
+                anim_steer: "🔄 توجيه احترافي: قم بإمالة الهاتف لليمين واليسار",
+                anim_gas: "دواسة البنزين: اسحب الإبهام للأسفل للتسارع",
+                anim_brake: "🛑 فرامل: اسحب الإبهام للأسفل للتوقف",
+                anim_shift: "⚙️ ناقل الحركة: اضغط لتغيير التروس",
+                control_title: "نظام التحكم واللمس",
+                tip_title: "تنبيه هام: زوايا القيادة والفيزياء",
+                tip_p1: "للحصول على تجربة القيادة الأكثر واقعية <strong>وثباتاً</strong> على السرعات العالية والسرعات المنخفضة، امسك هاتفك بزاوية بين <span dir='ltr'>90 - 120</span> درجة (بشكل شبه عمودي).",
+                tip_p2: "أما إذا كنت تفضل حركة ستيرنج <strong>سريعة جداً وخفيفة</strong>، قم بإمالة الهاتف للخلف لأكثر من 120 درجة (وحاول أن لا تصل إلى أكثر من 160 درجة للسيطرة على التحكم والستيرنج).",
+                // 🌟 الجملة اللي طلبتها بالحرف 🌟
+                tip_p3: "<strong style='color: #ffcc00;'>⚠️ إعدادات اللعبة:</strong> للحصول على دقة و واقعية في التحكم ضع زاوية ميلان الستيرنج في اللعبة على <strong dir='ltr'>800</strong> <strong>درجة</strong> في إعدادات اللعبة.",
+                tip_reason_title: "لماذا يحدث ذلك؟",
+                tip_reason_desc: " يعتمد تطبيق <span dir='ltr'>VELOX</span> على مستشعرات الجاذبية (مقياس التسارع). عندما تميل الهاتف للخلف، يقل تأثير الجاذبية على محور التوجيه الأساسي، مما يجعل النظام حساساً لأقل حركة باليد، وبالتالي تتضاعف سرعة وحساسية الستيرنج فوراً!",
+                down_title: "مركز التحميل",
+                card1_title: "📱 تطبيق الهاتف", card1_desc: "التطبيق الأساسي للهاتف، مجاني بالكامل وبدون إعلانات مزعجة.",
+                card2_title: "💻 برنامج الكمبيوتر", card2_desc: "البرنامج الذي يستقبل إشارات الهاتف ويترجمها لأي لعبة سيارات بسرعة خيالية.",
+                card3_title: "⚙️ تعريف <span dir='ltr'>vJoy</span>", card3_desc: "تعريف وهمي ضروري ليقرأ الكمبيوتر هاتفك كأنه يد تحكم أصلية.",
+                card_btn_download: "تحميل",
+                guide_title: "دليل التشغيل",
+                // 🌟 حل مشكلة تداخل الكلام العربي والإنجليزي 🌟
+                step1_title: "الخطوة الأولى: تثبيت تعريف <span dir='ltr'>vJoy</span> ⚙️", 
+                step1_desc: "قم بتثبيت برنامج <span dir='ltr'>vJoy</span>. افتح '<span dir='ltr'>Configure vJoy</span>' وتأكد من تفعيل المحاور <span dir='ltr'>X, Y, Z</span>، وحدد الأزرار (<span dir='ltr'>Buttons</span>) إلى 5، ثم اضغط <span dir='ltr'>Apply</span>.",
+                step2_title: "الخطوة الثانية: تشغيل برنامج الكمبيوتر 💻", 
+                step2_desc: "قم بتشغيل برنامج الكمبيوتر. إذا ظهرت لك رسالة حماية ويندوز، اضغط '<span dir='ltr'>More Info</span>' ثم '<span dir='ltr'>Run anyway</span>'. تأكد أن الهاتف والكمبيوتر متصلان بنفس شبكة الـ <span dir='ltr'>Wi-Fi</span>.",
+                step3_title: "الخطوة الثالثة: تشغيل التطبيق 📱", 
+                step3_desc: "افتح التطبيق على هاتفك، وسيبحث تلقائياً عن الكمبيوتر. بمجرد ظهور كلمة '<span dir='ltr'>CONNECTED</span>' باللون الأخضر، أنت جاهز للقيادة!",
+                faq_title: "الأسئلة الشائعة", faq_q1: "هل يوجد تأخير (<span dir='ltr'>Delay</span>) في الاستجابة؟", faq_a1: "مستحيل! نستخدم بروتوكول <span dir='ltr'>UDP</span> مع نظام <span dir='ltr'>Sensor Fusion</span> لضمان انتقال حركتك من الهاتف إلى اللعبة في أجزاء من الملي ثانية.", faq_q2: "السيارة تفقد السيطرة على السرعات العالية، ما الحل؟", faq_a2: "لأن الاستجابة لدينا 'خام' وسريعة جداً، ننصح بتفعيل نظام '<span dir='ltr'>Stability Control</span>' بنسبة 100% من إعدادات اللعبة للحصول على ثبات مثالي.", faq_q3: "ماذا يحدث بعد انتهاء التجربة المجانية (3 أيام)؟", faq_a3: "سيتوقف برنامج الكمبيوتر عن استقبال الأوامر وسيطلب منك إدخال 'كود التفعيل'. يمكنك شراء الكود من موقعنا بدفع لمرة واحدة فقط لتفعيله مدى الحياة.",
+                footer_support_label: "الدعم الفني المباشر",
+                footer_text: "جميع الحقوق محفوظة &copy; 2026 تم التطوير بواسطة <span style='color: var(--primary); font-weight: bold;' dir='ltr'>Rizdex Studio</span>"
+            }
+        };
+
+        const langBtn = document.getElementById('langToggle');
+        const controlAr = document.getElementById('control_ar');
+        const controlEn = document.getElementById('control_en');
+        let currentLang = 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = lang;
+            langBtn.textContent = lang === 'en' ? 'عربي' : 'English';
+
+            if (lang === 'ar') {
+                controlAr.style.display = 'block';
+                controlEn.style.display = 'none';
+            } else {
+                controlAr.style.display = 'none';
+                controlEn.style.display = 'block';
+            }
+
+            document.querySelectorAll('[data-key]').forEach(elem => {
+                const key = elem.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    elem.innerHTML = translations[lang][key];
+                }
+            });
+        }
+
+        langBtn.addEventListener('click', () => {
+            const newLang = currentLang === 'en' ? 'ar' : 'en';
+            setLanguage(newLang);
+        });
+
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                item.parentElement.classList.toggle('active');
+            });
+        });
+
+        const phone = document.getElementById('phoneWrapper');
+        const wheel = document.getElementById('steerWheel');
+        const thumbL = document.getElementById('thumbLeft');
+        const thumbR = document.getElementById('thumbRight');
+        const gasFill = document.getElementById('gasFill');
+        const brakeFill = document.getElementById('brakeFill');
+        const shiftUp = document.getElementById('shiftUp');
+        const shiftDown = document.getElementById('shiftDown');
+        const caption = document.getElementById('demoCaption');
+
+        function wait(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+
+        async function runDemoLoop() {
+            while(true) {
+                // 1. حركة الستيرنج
+                caption.setAttribute('data-key', 'anim_steer'); // 👈 إخبار زر الترجمة بالحالة الحالية
+                caption.innerHTML = translations[currentLang].anim_steer;
+                caption.style.color = '#a020f0';
+                
+                phone.style.transform = 'rotate(-125deg)';
+                wheel.style.transform = 'rotate(-400deg)';
+                await wait(2800); 
+                
+                phone.style.transform = 'rotate(125deg)';
+                wheel.style.transform = 'rotate(400deg)';
+                await wait(2800); 
+                
+                phone.style.transform = 'rotate(0deg)';
+                wheel.style.transform = 'rotate(0deg)';
+                await wait(2000); 
+
+                // 2. حركة البنزين
+                caption.setAttribute('data-key', 'anim_gas'); // 👈 إخبار زر الترجمة بالحالة الحالية
+                caption.innerHTML = translations[currentLang].anim_gas;
+                caption.style.color = '#00ff88';
+                
+                thumbR.style.top = '100px'; 
+                thumbR.style.right = '25px';
+                thumbR.style.transform = 'rotate(0deg)';
+                await wait(600);
+                
+                thumbR.style.top = '160px'; 
+                gasFill.style.height = '100%'; 
+                await wait(1000);
+                
+                thumbR.style.top = '100px'; 
+                thumbR.style.right = '10px';
+                thumbR.style.transform = 'rotate(-15deg)';
+                gasFill.style.height = '0%';
+                await wait(800);
+
+                // 3. حركة الفرامل
+                caption.setAttribute('data-key', 'anim_brake'); // 👈 إخبار زر الترجمة بالحالة الحالية
+                caption.innerHTML = translations[currentLang].anim_brake;
+                caption.style.color = '#ff3333';
+                
+                thumbL.style.top = '100px';
+                thumbL.style.left = '25px';
+                thumbL.style.transform = 'rotate(0deg)';
+                await wait(600);
+                
+                thumbL.style.top = '160px'; 
+                brakeFill.style.height = '100%'; 
+                await wait(1000);
+                
+                thumbL.style.top = '100px'; 
+                thumbL.style.left = '10px';
+                thumbL.style.transform = 'rotate(15deg)';
+                brakeFill.style.height = '0%';
+                await wait(800);
+
+                // 4. الشيفترات
+                caption.setAttribute('data-key', 'anim_shift'); // 👈 إخبار زر الترجمة بالحالة الحالية
+                caption.innerHTML = translations[currentLang].anim_shift;
+                caption.style.color = '#fff';
+                
+                thumbL.style.top = '110px'; thumbL.style.left = '95px'; thumbL.style.transform = 'rotate(0deg)';
+                thumbR.style.top = '110px'; thumbR.style.right = '95px'; thumbR.style.transform = 'rotate(0deg)';
+                await wait(600);
+                
+                shiftDown.classList.add('active'); 
+                await wait(200);
+                shiftDown.classList.remove('active');
+                await wait(400);
+
+                shiftUp.classList.add('active'); 
+                await wait(200);
+                shiftUp.classList.remove('active');
+                await wait(600);
+
+                // رجوع للوضع الطبيعي
+                thumbL.style.top = '100px'; thumbL.style.left = '10px'; thumbL.style.transform = 'rotate(15deg)';
+                thumbR.style.top = '100px'; thumbR.style.right = '10px'; thumbR.style.transform = 'rotate(-15deg)';
+                await wait(1000);
+            }
+        }
+
+        setLanguage('en');
+        runDemoLoop(); 
+    </script>
+</body>
+</html>
