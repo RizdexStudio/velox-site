@@ -665,49 +665,52 @@
     </div>
 
     <h2 class="section-title" id="downloads" data-key="down_title">Download Center</h2>
-    <section class="downloads">
-        <div class="card">
-            <h3 data-key="card1_title">Android App</h3>
-            <div class="price-tag" data-key="price_free">FREE</div>
-            <p data-key="card1_desc">The main app for your phone. Completely free and without any annoying ads.</p>
-            <a href="Velox.apk" class="btn btn-secondary" data-key="card_btn_download" download="Velox.apk">Download App</a>
-        </div>
+<section class="downloads">
+    <!-- Android App -->
+    <div class="card">
+        <h3 data-key="card1_title">Android App</h3>
+        <div class="price-tag" data-key="price_free">FREE</div>
+        <p data-key="card1_desc">The main app for your phone. Completely free and without any annoying ads.</p>
+        <a href="Velox.apk" class="btn btn-secondary" data-key="card_btn_download_android" download="Velox.apk">Download App</a>
+    </div>
+    
+    <!-- PC Software -->
+    <div class="card" style="border: 1px solid var(--secondary); box-shadow: 0 0 15px rgba(0, 245, 212, 0.15);">
+        <h3 data-key="card2_title">PC Software</h3>
+        <div class="price-tag" data-key="card2_price">Buy Activation Code ($4.99)</div>
+        <p data-key="card2_desc">Purchase a lifetime activation code for the PC software.</p>
+        <a href="javascript:void(0);" class="btn btn-primary" data-key="card_btn_buy_direct">Buy Activation Code</a>
+        <a href="PhoneWheel.exe" class="btn btn-secondary" style="margin-top: 10px;" download data-key="card_btn_download_app">Download App</a>
+    </div>
+    
+    <!-- vJoy Driver -->
+    <div class="card">
+        <h3 data-key="card3_title">vJoy Driver</h3>
+        <div class="price-tag" data-key="price_required">REQUIRED</div>
+        <p data-key="card3_desc">A virtual driver required for your PC to recognize your phone as a genuine controller.</p>
+        <a href="vJoySetup.exe" class="btn btn-secondary" data-key="card_btn_download">Download vJoy</a>
         
-        <div class="card" style="border: 1px solid var(--secondary); box-shadow: 0 0 15px rgba(0, 245, 212, 0.15);">
-            <h3 data-key="card2_title">PC Software</h3>
-            <div class="price-tag" data-key="card2_price">Buy Activation Code ($4.99)</div>
-            <p data-key="card2_desc">Purchase a lifetime activation code for the PC software.</p>
-            <a href="javascript:void(0);" class="btn btn-primary" data-key="card_btn_buy_direct">Buy Activation Code</a>
-            <a href="PhoneWheel.exe" class="btn btn-secondary" style="margin-top: 10px;" download data-key="card_btn_download_app">Download App</a>
+        <!-- زر عرض صورة إعدادات vJoy -->
+        <div style="text-align: center; margin-top: 15px; width: 100%;">
+            <button onclick="openVjoyImage()" style="
+                background: transparent;
+                border: 1px solid var(--secondary);
+                color: var(--secondary);
+                padding: 8px 20px;
+                border-radius: 20px;
+                cursor: pointer;
+                font-size: 13px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                font-family: var(--font-en);
+                letter-spacing: 0.5px;
+            " onmouseover="this.style.background='rgba(0,245,212,0.1)'; this.style.boxShadow='var(--secondary-glow)';" 
+            onmouseout="this.style.background='transparent'; this.style.boxShadow='none';" data-key="card_btn_view_vjoy">
+                View vJoy Settings
+            </button>
         </div>
-        
-        <div class="card">
-            <h3 data-key="card3_title">vJoy Driver</h3>
-            <div class="price-tag" data-key="price_required">REQUIRED</div>
-            <p data-key="card3_desc">A virtual driver required for your PC to recognize your phone as a genuine controller.</p>
-            <a href="javascript:void(0);" class="btn btn-secondary" data-key="card_btn_download">Download vJoy</a>
-            
-            <!-- زر عرض صورة إعدادات vJoy -->
-            <div style="text-align: center; margin-top: 15px; width: 100%;">
-                <button onclick="openVjoyImage()" style="
-                    background: transparent;
-                    border: 1px solid var(--secondary);
-                    color: var(--secondary);
-                    padding: 8px 20px;
-                    border-radius: 20px;
-                    cursor: pointer;
-                    font-size: 13px;
-                    font-weight: 600;
-                    transition: all 0.3s ease;
-                    font-family: var(--font-en);
-                    letter-spacing: 0.5px;
-                " onmouseover="this.style.background='rgba(0,245,212,0.1)'; this.style.boxShadow='var(--secondary-glow)';" 
-                onmouseout="this.style.background='transparent'; this.style.boxShadow='none';" data-key="card_btn_view_settings">
-                    View vJoy Settings
-                </button>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
 
     <h2 class="section-title" id="guide" data-key="guide_title">Setup Guide</h2>
     <section class="guide-container">
