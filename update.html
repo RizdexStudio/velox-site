@@ -95,9 +95,30 @@
         <h1>VELO<span>X</span></h1>
 
         <div class="btn-group">
-            <a href="https://rizdexstudio.github.io/velox-site/Velox.apk" class="btn btn-primary" download>Download Update</a>
+            <a href="#" class="btn btn-primary" id="downloadBtn">Download Update</a>
             <a href="https://rizdexstudio.github.io/velox-site/" class="btn btn-secondary">Home</a>
         </div>
     </div>
+
+    <script>
+        // تحديد نوع الجهاز
+        const isAndroid = /android/i.test(navigator.userAgent);
+        const isWindows = /windows/i.test(navigator.userAgent);
+
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        // تعيين الرابط المناسب حسب الجهاز
+        if (isAndroid) {
+            downloadBtn.href = 'https://rizdexstudio.github.io/velox-site/VELOX.apk';
+            downloadBtn.download = 'VELOX.apk';
+        } else if (isWindows) {
+            downloadBtn.href = 'https://rizdexstudio.github.io/velox-site/VELOX.exe';
+            downloadBtn.download = 'VELOX.exe';
+        } else {
+            // إذا كان جهاز آخر (Mac, Linux, إلخ) - استخدم رابط APK كافتراضي
+            downloadBtn.href = 'https://rizdexstudio.github.io/velox-site/VELOX.apk';
+            downloadBtn.download = 'VELOX.apk';
+        }
+    </script>
 </body>
 </html>
